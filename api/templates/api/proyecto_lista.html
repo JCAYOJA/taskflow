@@ -1,0 +1,13 @@
+{% extends "api/base.html" %}
+{% block content %}
+<h2>Mis Proyectos</h2>
+<a href="{% url 'crear_proyecto' %}">➕ Nuevo Proyecto</a>
+<ul>
+{% for p in proyectos %}
+  <li><strong>{{ p.nombre }}</strong> — {{ p.descripcion }}
+  <a href="{% url 'editar_proyecto' p.pk %}">Editar</a>
+  <a href="{% url 'eliminar_proyecto' p.pk %}">Eliminar</a></li>
+{% empty %}<p>No tienes proyectos.</p>
+{% endfor %}
+</ul>
+{% endblock %}

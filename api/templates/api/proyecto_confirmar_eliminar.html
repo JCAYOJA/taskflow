@@ -1,0 +1,7 @@
+{% extends "api/base.html" %}
+{% block content %}
+<h2>¿Eliminar?</h2>
+<p><strong>{{ proyecto.nombre }}</strong></p>
+<form method="post">{% csrf_token %}<button>✅ Sí, eliminar</button></form>
+<a href="{% url 'lista_proyectos' %}">❌ Cancelar</a>
+{% endblock %}

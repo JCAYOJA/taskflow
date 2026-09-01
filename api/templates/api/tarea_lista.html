@@ -1,0 +1,13 @@
+{% extends "api/base.html" %}
+{% block content %}
+<h2>Mis Tareas</h2>
+<a href="{% url 'crear_tarea' %}">➕ Nueva Tarea</a>
+<ul>
+{% for t in tareas %}
+  <li><strong>{{ t.titulo }}</strong> — {{ t.estado }} ({{ t.proyecto.nombre }})
+  <a href="{% url 'editar_tarea' t.pk %}">Editar</a>
+  <a href="{% url 'eliminar_tarea' t.pk %}">Eliminar</a></li>
+{% empty %}<p>No tienes tareas.</p>
+{% endfor %}
+</ul>
+{% endblock %}

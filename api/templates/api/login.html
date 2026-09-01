@@ -1,0 +1,10 @@
+{% extends "api/base.html" %}
+{% block content %}
+<h2>Iniciar Sesión</h2>
+<form method="post">{% csrf_token %}
+<p>Usuario: <input type="text" name="username" required></p>
+<p>Contraseña: <input type="password" name="password" required></p>
+<button>Ingresar</button>
+</form>
+<p>¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate</a></p>
+{% endblock %}
