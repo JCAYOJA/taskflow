@@ -9,7 +9,7 @@ Sistema completo de gestión de proyectos y tareas desarrollado con **Django 6.1
 * **Gestión total (CRUD):** Control completo de Proyectos y Tareas vinculadas.
 * **API REST con JWT:** Autenticación mediante tokens de acceso (`Access Token`) y de renovación (`Refresh Token`).
 * **Documentación automática:** API completamente documentada con Swagger/OpenAPI.
-* **Calidad de código:** Pruebas automatizadas, logs configurados y optimización de consultas con `select_related`.
+* **Calidad de código:** Pruebas automatizadas, logs configurados y políticas de intercambio de recursos cruzados (**CORS**) habilitadas.
 
 ---
 
@@ -18,6 +18,7 @@ Sistema completo de gestión de proyectos y tareas desarrollado con **Django 6.1
 * **Framework principal:** Django 6.1 & Django REST Framework
 * **Autenticación:** SimpleJWT
 * **Documentación:** DRF YASG (Swagger)
+* **Políticas CORS:** Django CORS Headers
 * **Base de datos:** SQLite3
 * **Configuración:** Python-dotenv
 
@@ -37,7 +38,7 @@ venv\Scripts\activate
 source venv/bin/activate
 
 # Instalar dependencias necesarias
-pip install django djangorestframework djangorestframework-simplejwt drf-yasg python-dotenv
+pip install django djangorestframework djangorestframework-simplejwt drf-yasg django-cors-headers python-dotenv
 ```
 
 ### 2. Configurar variables de entorno
@@ -52,7 +53,7 @@ ALLOWED_HOSTS=localhost,127.0.0.1
 ### 3. Inicializar la base de datos y el servidor
 ```bash
 # Aplicar migraciones
-python manage.py makemigrations
+python manage.py makemigrations api
 python manage.py migrate
 
 # Crear usuario administrador (Superusuario)
@@ -68,8 +69,9 @@ python manage.py runserver
 
 | Ruta | Descripción |
 | :--- | :--- |
-| `http://127.0.0.1:8000/` | Página principal / Inicio de sesión |
-| `http://127.0.0.1:8000/registro/` | Registro de nuevo usuario |
+| `http://127.0.0.1:8000/` | Página principal / Redirección automática |
+| `http://127.0.0` | Inicio de sesión (Web) |
+| `http://127.0.0.1:8000/registro/` | Registro de nuevo usuario (Web) |
 | `http://127.0.0.1:8000/proyectos/` | Panel de gestión de proyectos (Web) |
 | `http://127.0.0.1:8000/tareas/` | Panel de gestión de tareas (Web) |
 | `http://127.0.0.1:8000/admin/` | Panel de administración de Django |
@@ -78,6 +80,7 @@ python manage.py runserver
 | `http://127.0.0.1:8000/api/token/refresh/` | 🔑 Renovar token JWT (POST) |
 | `http://127.0.0.1:8000/api/proyectos/` | API REST — Endpoints de Proyectos |
 | `http://127.0.0.1:8000/api/tareas/` | API REST — Endpoints de Tareas |
+| `http://127.0.0` | 🚀 API REST — Endpoint Personalizado de Tareas Pendientes |
 
 ---
 
@@ -122,6 +125,12 @@ taskflow/
 ├── manage.py               # Gestor de comandos de Django
 └── README.md               # Este archivo
 ```
+
+---
+**Autor:** JCAYOJA  
+**Versión:** 1.0  
+**Fecha:** 6 de septiembre de 2026
+`
 
 ---
 **Autor:** JCAYOJA  

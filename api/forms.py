@@ -4,10 +4,12 @@ from .models import Usuario, Proyecto, Tarea
 
 
 class RegistroForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=True, label="Correo electrónico")
+
     class Meta:
         model = Usuario
-        fields = ['username', 'email', 'password1', 'password2']
+        # 🚀 Se eliminan 'password1' y 'password2' de aquí porque UserCreationForm los maneja internamente
+        fields = ['username', 'email']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -31,4 +33,5 @@ class TareaForm(forms.ModelForm):
         usuario = kwargs.pop('usuario', None)
         super().__init__(*args, **kwargs)
         if usuario:
+            # Filtra el desplegable para que solo aparezcan los proyectos del usuario logueado
             self.fields['proyecto'].queryset = Proyecto.objects.filter(usuario=usuario)
